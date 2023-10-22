@@ -9,16 +9,254 @@
         {
             "name": "default",
             "displayName": "Default Config",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/${presetName}/build",
             "installDir": "${sourceDir}/out/${presetName}/install",
-            "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": {
-                    "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-                    "type": "FILEPATH"
-                }
-            },
+            "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "environment": {},
             "vendor": {}
+        },
+        {
+            "name": "debug",
+            "hidden": true,
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "hidden": true,
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "clang16-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-16"
+            }
+        },
+        {
+            "name": "clang16-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-16"
+            }
+        },
+        {
+            "name": "clang17-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-17"
+            }
+        },
+        {
+            "name": "clang17-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-17"
+            }
+        },
+        {
+            "name": "clang18-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-18"
+            }
+        },
+        {
+            "name": "clang18-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++-18"
+            }
+        },
+        {
+            "name": "gcc10-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-10"
+            }
+        },
+        {
+            "name": "gcc10-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-10"
+            }
+        },
+        {
+            "name": "gcc11-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-11"
+            }
+        },
+        {
+            "name": "gcc11-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-11"
+            }
+        },
+        {
+            "name": "gcc12-debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-12"
+            }
+        },
+        {
+            "name": "gcc12-release",
+            "inherits": "release",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++-12"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "targets": [
+                "install"
+            ]
+        },
+        {
+            "inherits": "base",
+            "name": "clang16-debug",
+            "configurePreset": "clang16-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "clang16-release",
+            "configurePreset": "clang16-release"
+        },
+        {
+            "inherits": "base",
+            "name": "clang17-debug",
+            "configurePreset": "clang17-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "clang17-release",
+            "configurePreset": "clang17-release"
+        },
+        {
+            "inherits": "base",
+            "name": "clang18-debug",
+            "configurePreset": "clang18-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "clang18-release",
+            "configurePreset": "clang18-release"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc10-debug",
+            "configurePreset": "gcc10-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc10-release",
+            "configurePreset": "gcc10-release"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc11-debug",
+            "configurePreset": "gcc11-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc11-release",
+            "configurePreset": "gcc11-release"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc12-debug",
+            "configurePreset": "gcc12-debug"
+        },
+        {
+            "inherits": "base",
+            "name": "gcc12-release",
+            "configurePreset": "gcc12-release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "clang16-debug",
+            "configurePreset": "clang16-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "clang16-release",
+            "configurePreset": "clang16-release",
+            "inherits": "base"
+        },
+        {
+            "name": "clang17-debug",
+            "configurePreset": "clang17-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "clang17-release",
+            "configurePreset": "clang17-release",
+            "inherits": "base"
+        },
+        {
+            "name": "clang18-debug",
+            "configurePreset": "clang18-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "clang18-release",
+            "configurePreset": "clang18-release",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc10-debug",
+            "configurePreset": "gcc10-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc10-release",
+            "configurePreset": "gcc10-release",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc11-debug",
+            "configurePreset": "gcc11-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc11-release",
+            "configurePreset": "gcc11-release",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc12-debug",
+            "configurePreset": "gcc12-debug",
+            "inherits": "base"
+        },
+        {
+            "name": "gcc12-release",
+            "configurePreset": "gcc12-release",
+            "inherits": "base"
         }
     ]
 }

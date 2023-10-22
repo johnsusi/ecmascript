@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        build_type: [debug, release]
+        include:
+          - os: windows-latest
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            cpp_compiler: clang++
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: make configure PRESET=${{ matrix.cpp_compiler }}-${{ matrix.build_type }}
+    - name: build
+      run: make build PRESET=${{ matrix.cpp_compiler }}-${{ matrix.build_type }}
+    - name: test
+      run: make test PRESET=${{ matrix.cpp_compiler }}-${{ matrix.build_type }}
+

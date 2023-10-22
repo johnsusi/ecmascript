@@ -2,7 +2,7 @@
 
 #include <ecmascript/json/json.hpp>
 
-TEST_CASE("Null is parsed", "[json]")
+TEST_CASE("null", "[json]")
 {
     REQUIRE(parse_json("null").is_null());
 }

@@ -7,4 +7,9 @@ project(ecmascript
 )
 
 add_subdirectory(src)
-add_subdirectory(tests)
+
+include(CTest)
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

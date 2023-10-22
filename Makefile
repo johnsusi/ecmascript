@@ -5,9 +5,13 @@ else
 endif
 .SHELLFLAGS := -NoProfile -Command 
 
-OUT = out
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
-PRESET = default
+OUT ?= out
+PRESET ?= default
 
 PANDOCFLAGS =                        \
   --table-of-contents                \
@@ -29,23 +33,22 @@ $(OUT)/%.pdf: docs/%.md Makefile | $(OUT)
 $(OUT):
 	mkdir $(OUT)
 
-.PHONY: list-presets
+.PHONY: list-presets configure build test clean
+
 list-presets:
 	cmake --list-presets=all .
 
-.PHONY: configure
 $(OUT)/$(PRESET)/build: CMakeLists.txt CMakePresets.json vcpkg.json
 	cmake --preset $(PRESET)
 
-.PHONY: build
+configure: $(OUT)/$(PRESET)/build
+
 build: | $(OUT)/$(PRESET)/build
-	cmake --build $(OUT)/$(PRESET)/build --target install
+	cmake --build --preset $(PRESET)
 
-.PHONY: test
 test: build
-	ctest $(OUT)/$(PRESET)
+	ctest --preset $(PRESET)
 
-.PHONY: clean
 clean:
 	@Get-ChildItem . -r $(OUT) | Remove-Item -r -force 
 
