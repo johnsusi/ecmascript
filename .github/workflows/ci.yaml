@@ -24,6 +24,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: 'true'
+    - name: diag
+      run: |
+        which ninja
+        which cmake
+        which vcpkg
+        which clang++
+        which clang++-16
+        which clang++-17
+        which clang++-18
+        which g++
+        which g++-10
+        which g++-11
+        which g++-12
+        ninja --version
+        cmake --version
+        vcpkg --version
+        clang++ --version
+        g++ --version
     - name: configure
       run: make configure PRESET=${{ matrix.cpp_compiler }}-${{ matrix.build_type }}
     - name: build
