@@ -18,9 +18,9 @@ jobs:
           - os: windows-latest
             cpp_compiler: cl
           - os: ubuntu-latest
-            cpp_compiler: g++
+            cpp_compiler: gcc12
           - os: ubuntu-latest
-            cpp_compiler: clang++
+            cpp_compiler: clang18
 
     steps:
     - uses: actions/checkout@v3
