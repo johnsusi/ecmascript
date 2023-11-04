@@ -27,7 +27,15 @@ jobs:
       with:
         submodules: 'true'
     - name: Install dependencies
-      run: apt-get install -y ninja-build    
+      shell: bash
+      run:   |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          sudo apt-get install -y ninja-build
+        elif [ "$RUNNER_OS" == "Windows" ]; then
+          choco install ninja
+        elif [ "$RUNNER_OS" == "macOS" ]; then
+          brew install ninja
+        fi      
     - name: configure
       run: make configure PRESET=${{ matrix.cpp_compiler }}-${{ matrix.build_type }}
     - name: build
