@@ -29,6 +29,7 @@ jobs:
           curl -LO https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo DEBIAN_FRONTEND=noninteractive ./llvm.sh 17
+          sudo apt-get install -y ninja-build
         elif [ "$RUNNER_OS" == "Windows" ]; then
           choco install ninja
         elif [ "$RUNNER_OS" == "macOS" ]; then
